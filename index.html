@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Trip Advisor – Review your Maldives trip</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <style>
+        :root {
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            --ink: #000;
+            --muted: #2A3A3F;
+            --line: #C4DCDC;
+            --ok: #17825D;
+            --warn: #B7791F;
+            --bad: #C62F3D;
+            --accent: #0A7F8C;
+        }
+
+        html {
+            scroll-padding-top: env(safe-area-inset-top, 0px);
+            height: 100%
+        }
+
+        body {
+            font-family: Poppins, system-ui, sans-serif;
+            background: #7FD3EE;
+            color: var(--ink);
+            min-height: 100%;
+            margin: 0
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, .75);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, .9)
+        }
+
+        .btn {
+            background: var(--accent);
+            color: #fff;
+            transition: transform .15s, background .15s
+        }
+
+        .btn:hover:not(:disabled) {
+            background: #08666F;
+            transform: translateY(-1px)
+        }
+
+        textarea:focus,
+        button:focus-visible,
+        a:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px
+        }
+
+        dialog {
+            background: #fff;
+            color: var(--ink);
+            margin: auto;
+            max-height: 92vh;
+            overflow: auto;
+            border: 0
+        }
+
+        dialog::backdrop {
+            background: rgba(10, 30, 40, .5);
+            backdrop-filter: blur(3px)
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background image (inline SVG: bright Maldives lagoon) -->
+    <div aria-hidden="true" style="position:fixed;inset:0;z-index:-1">
+        <img src="./image.jpg" style="width: 100%; height: 100%;">
+            <defs>
+                <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#4FC3F7" />
+                    <stop offset=".6" stop-color="#D2F3FB" />
+                    <stop offset="1" stop-color="#FFF3D6" />
+                </linearGradient>
+                <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#98F3E3" />
+                    <stop offset=".4" stop-color="#40D3D2" />
+                    <stop offset="1" stop-color="#1DA6BC" />
+                </linearGradient>
+                <radialGradient id="sun" cx=".5" cy=".5" r=".5">
+                    <stop offset="0" stop-color="#FFF1C7" />
+                    <stop offset="1" stop-color="#FFE3B8" stop-opacity="0" />
+                </radialGradient>
+                <g id="villa">
+                    <polygon points="-52,36 0,0 52,36" fill="#B07F52" />
+                    <polygon points="-52,36 0,0 52,36" fill="none" stroke="#6B4A32" stroke-width="2"
+                        stroke-dasharray="3 5" />
+                    <rect x="-36" y="36" width="72" height="24" fill="#FBF3E2" />
+                    <rect x="-9" y="42" width="18" height="18" fill="#9A7552" />
+                    <rect x="-32" y="60" width="3" height="40" fill="#9A7552" />
+                    <rect x="29" y="60" width="3" height="40" fill="#9A7552" />
+                </g>
+                <path id="leaf" d="M0 0 C-40 -56 -118 -56 -160 -8 C-106 -28 -52 -24 0 0Z" fill="#2FB574" />
+                <g id="palm">
+                    <path d="M0 0 C10 -90 18 -150 52 -215" fill="none" stroke="#8A6040" stroke-width="13"
+                        stroke-linecap="round" />
+                    <g transform="translate(52 -215)">
+                        <use href="#leaf" transform="rotate(-25)" />
+                        <use href="#leaf" transform="rotate(22)" />
+                        <use href="#leaf" transform="rotate(72)" />
+                        <use href="#leaf" transform="scale(-1 1) rotate(-25)" />
+                        <use href="#leaf" transform="scale(-1 1) rotate(35)" />
+                    </g>
+                </g>
+            </defs>
+            <rect width="1440" height="620" fill="url(#sky)" />
+            <circle cx="1130" cy="500" r="260" fill="url(#sun)" />
+            <circle cx="1130" cy="500" r="48" fill="#FFF6DC" />
+            <g fill="#fff" opacity=".95">
+                <ellipse cx="260" cy="130" rx="120" ry="24" />
+                <ellipse cx="340" cy="112" rx="70" ry="22" />
+                <ellipse cx="760" cy="90" rx="110" ry="20" />
+                <ellipse cx="830" cy="76" rx="60" ry="18" />
+                <ellipse cx="1250" cy="170" rx="100" ry="20" />
+                <ellipse cx="1310" cy="152" rx="56" ry="17" />
+            </g>
+            <g fill="none" stroke="#31506B" stroke-width="2.5" stroke-linecap="round">
+                <path d="M520 210 q10 -10 20 0 q10 -10 20 0" />
+                <path d="M590 245 q8 -8 16 0 q8 -8 16 0" />
+                <path d="M980 190 q9 -9 18 0 q9 -9 18 0" />
+            </g>
+            <rect y="600" width="1440" height="300" fill="url(#sea)" />
+            <g fill="#FFF3D1" opacity=".55">
+                <rect x="1100" y="610" width="60" height="4" rx="2" />
+                <rect x="1080" y="630" width="100" height="4" rx="2" />
+                <rect x="1060" y="652" width="140" height="4" rx="2" />
+                <rect x="1040" y="676" width="180" height="4" rx="2" />
+                <rect x="1020" y="704" width="220" height="4" rx="2" />
+            </g>
+            <g fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="2" stroke-linecap="round">
+                <path d="M60 700 q30 -10 60 0 t60 0 t60 0" />
+                <path d="M420 770 q30 -10 60 0 t60 0 t60 0" />
+                <path d="M700 730 q30 -10 60 0 t60 0 t60 0" />
+                <path d="M300 640 q30 -10 60 0 t60 0" />
+            </g>
+            <rect x="560" y="646" width="600" height="6" fill="#9A7552" />
+            <use href="#villa" transform="translate(640 610)" />
+            <use href="#villa" transform="translate(790 610)" />
+            <use href="#villa" transform="translate(940 610)" />
+            <use href="#villa" transform="translate(1090 610)" />
+            <path d="M0 820 C240 780 500 800 740 850 L900 900 H0Z" fill="#FFF1D2" />
+            <path d="M1130 900 C1210 850 1330 850 1440 870 V900Z" fill="#FFF1D2" />
+            <use href="#palm" transform="translate(120 850)" />
+            <use href="#palm" transform="translate(1290 880) scale(.9)" />
+            <rect width="1440" height="900" fill="#fff" opacity=".08" />
+        </svg>
+    </div>
+
+    <!-- Navbar -->
+    <header class="relative z-10 px-4 pt-4">
+        <nav class="glass max-w-5xl mx-auto rounded-full pl-6 pr-3 py-2.5 flex items-center justify-between"
+            aria-label="Main">
+            <a href="#" class="text-lg font-semibold">Trip Advisor</a>
+            <ul class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <li><a href="#" class="hover:underline underline-offset-4">Home</a></li>
+                <li><a href="#" class="hover:underline underline-offset-4">Trips</a></li>
+                <li><a href="#" class="hover:underline underline-offset-4">Reviews</a></li>
+                <li><a href="#" class="hover:underline underline-offset-4">Contact</a></li>
+            </ul>
+            <div class="flex items-center gap-2">
+                <button data-open class="btn hidden sm:inline-block rounded-full px-5 py-2 text-sm font-medium">Write a
+                    review</button>
+                <button id="menuBtn" class="md:hidden p-2 rounded-full border border-black/30" aria-label="Open menu"
+                    aria-expanded="false">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round">
+                        <path d="M4 7h16M4 12h16M4 17h16" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+        <ul id="mobileMenu" class="glass hidden md:hidden max-w-5xl mx-auto mt-2 rounded-2xl p-3 text-sm font-medium">
+            <li><a class="block px-3 py-2" href="#">Home</a></li>
+            <li><a class="block px-3 py-2" href="#">Trips</a></li>
+            <li><a class="block px-3 py-2" href="#">Reviews</a></li>
+            <li><a class="block px-3 py-2" href="#">Contact</a></li>
+        </ul>
+    </header>
+
+    <!-- Hero -->
+    <main class="relative z-10 max-w-3xl mx-auto px-5 pt-16 pb-24 sm:pt-24 text-center">
+        <p class="text-sm font-medium tracking-[.25em] uppercase">Maldives</p>
+        <h1 class="mt-4 text-4xl sm:text-6xl font-semibold leading-[1.1]">How was your Maldives escape?</h1>
+        <p class="mt-5 text-base sm:text-lg max-w-xl mx-auto" style="color:var(--muted)">Share the moment you&rsquo;ll
+            remember most and help future travelers choose with confidence.</p>
+        <button data-open
+            class="btn mt-9 rounded-full px-9 py-3.5 text-base font-medium shadow-lg shadow-teal-900/20">Write a
+            review</button>
+        <p class="mt-10 text-sm font-medium" style="color:var(--muted)">Overwater villa &nbsp;·&nbsp; 5 nights
+            &nbsp;·&nbsp; Raa Atoll</p>
+    </main>
+
+    <!-- Review modal -->
+    <dialog id="dlg" class="w-[calc(100%-2rem)] max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl" aria-labelledby="dlgTitle">
+        <button id="close"
+            class="absolute right-4 top-4 h-9 w-9 rounded-full text-xl leading-none border border-black/15"
+            aria-label="Close">&times;</button>
+        <div id="formBox">
+            <h2 id="dlgTitle" class="text-2xl font-semibold">Write your review</h2>
+            <p class="text-sm mt-1" style="color:var(--muted)">Your experience with our Maldives trip</p>
+
+            <label for="msg" class="block mt-6 text-sm font-medium">Your review <span class="font-normal"
+                    style="color:var(--muted)">· 200 characters max</span></label>
+            <textarea id="msg" rows="5" maxlength="200" placeholder="What made this trip special?"
+                aria-describedby="count warn" class="mt-2 w-full rounded-2xl p-4 resize-none text-sm"
+                style="border:1.5px solid var(--line);color:var(--ink)"></textarea>
+            <div class="mt-2 flex items-center justify-between text-sm">
+                <span id="count" aria-live="polite" class="font-medium">0/200 characters</span>
+                <span id="remain" style="color:var(--muted)">200 remaining</span>
+            </div>
+            <p id="warn" role="alert" class="text-sm mt-2 min-h-[1.25rem]" style="color:var(--bad)"></p>
+            <button id="send" disabled
+                class="btn mt-3 w-full rounded-2xl py-3.5 font-medium disabled:opacity-40 disabled:cursor-not-allowed">Submit
+                review</button>
+            <p id="hint" class="text-xs mt-2 text-center" style="color:var(--muted)">Write a few words to submit.</p>
+        </div>
+
+        <div id="done" class="hidden text-center py-6" role="status">
+            <div class="mx-auto h-16 w-16 rounded-full grid place-items-center text-3xl text-white"
+                style="background:var(--ok)">✓</div>
+            <h2 class="text-2xl font-semibold mt-4">Thank you!</h2>
+            <p id="doneText" class="mt-3 text-sm italic rounded-2xl p-4" style="background:#F1F7F7"></p>
+            <button id="again" class="mt-6 text-sm font-medium underline">Write another review</button>
+        </div>
+    </dialog>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
